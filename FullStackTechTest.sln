@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FullStackTechTest", "FullSt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{05436D74-E5FC-4873-BA99-5389D6D4400B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Models\Database.csproj", "{04C876A6-2AC7-4D5D-97ED-3C40E15BBF8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{2E610440-50FE-41A2-A6EB-ED5A5E2C7368}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{05436D74-E5FC-4873-BA99-5389D6D4400B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05436D74-E5FC-4873-BA99-5389D6D4400B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05436D74-E5FC-4873-BA99-5389D6D4400B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04C876A6-2AC7-4D5D-97ED-3C40E15BBF8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04C876A6-2AC7-4D5D-97ED-3C40E15BBF8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04C876A6-2AC7-4D5D-97ED-3C40E15BBF8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04C876A6-2AC7-4D5D-97ED-3C40E15BBF8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E610440-50FE-41A2-A6EB-ED5A5E2C7368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E610440-50FE-41A2-A6EB-ED5A5E2C7368}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E610440-50FE-41A2-A6EB-ED5A5E2C7368}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E610440-50FE-41A2-A6EB-ED5A5E2C7368}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
