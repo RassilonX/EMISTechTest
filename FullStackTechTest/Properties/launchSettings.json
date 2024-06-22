@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "FullStackTechTest": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DB_CONNECTION_STRING": "Server=localhost;Database=fourteen-fish;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+      },
+      "applicationUrl": "https://localhost:63538;http://localhost:63539"
+    }
+  }
+}
