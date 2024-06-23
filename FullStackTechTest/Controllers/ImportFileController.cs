@@ -35,8 +35,6 @@ public class ImportFileController : Controller
 
             dynamic data = JsonConvert.DeserializeObject(jsonData);
 
-            // Need to get the count of people, and save that into a variable
-            var personCount = await _personRepository.PersonCountAsync();
 
             // Use the variable to set the PersonId fields
             // Have the nulls or missing fields register as empty strings

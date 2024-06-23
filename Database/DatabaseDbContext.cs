@@ -21,12 +21,20 @@ public class DatabaseDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Person>()
+            .Property(p => p.Id)
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<Person>()
             .Property(p => p.FirstName)
             .HasColumnType("varchar(50)");
 
         modelBuilder.Entity<Person>()
             .Property(p => p.LastName)
             .HasColumnType("varchar(50)");
+
+        modelBuilder.Entity<Address>()
+            .Property(a => a.Id)
+            .ValueGeneratedOnAdd();
 
         modelBuilder.Entity<Address>()
             .Property(a => a.Line1)
