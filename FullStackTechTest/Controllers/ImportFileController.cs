@@ -1,7 +1,5 @@
 ﻿using DAL;
 using DAL.Dtos;
-using FullStackTechTest.Models.Home;
-using FullStackTechTest.Models.Import;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -11,11 +9,13 @@ public class ImportFileController : Controller
 {
     private readonly IPersonRepository _personRepository;
     private readonly IAddressRepository _addressRepository;
+    private readonly IDataImportRepository _dataImportRepository;
 
-    public ImportFileController(IPersonRepository personRepository, IAddressRepository addressRepository)
+    public ImportFileController(IPersonRepository personRepository, IAddressRepository addressRepository, IDataImportRepository dataImportRepository)
     {
         _personRepository = personRepository;
         _addressRepository = addressRepository;
+        _dataImportRepository = dataImportRepository;
     }
 
     public async Task<IActionResult> Index()
@@ -39,11 +39,12 @@ public class ImportFileController : Controller
 
             List<ImportJsonDto> data = JsonConvert.DeserializeObject<List<ImportJsonDto>>(jsonData);
 
+            var success = await _dataImportRepository.SaveJson(data);
 
-            // Use the variable to set the PersonId fields
-            // Have the nulls or missing fields register as empty strings
-            // Need to check if the database has any existing records, they need to be ignored or updated
-            // Store the data in your database
+            if (!success)
+            {
+                return Json(new { success = false });
+            }
 
             return Json(new { success = true });
         }
