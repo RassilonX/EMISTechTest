@@ -1,8 +1,13 @@
 ﻿using Database.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace FullStackTechTest.Models.Import;
+namespace DAL.Dtos;
 
-public class ImportJsonModel
+public class ImportJsonDto
 {
     public string FirstName { get; set; }
 
