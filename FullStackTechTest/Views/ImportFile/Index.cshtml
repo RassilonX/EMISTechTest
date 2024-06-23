@@ -11,6 +11,10 @@
     <input type="submit" id="file-submit" value="Import JSON Data" />
 </div>
 
+<p style="display: none;" id="importSuccessMessage">Data Import Succeeded</p>
+
+<p style="display: none;" id="importFailMessage">Data Import Failed</p>
+
 <script>
     // const fileInput = document.getElementById('file-input');
     // const submitButton = document.getElementById('file-submit');
@@ -36,6 +40,8 @@
 
     const fileInput = document.getElementById('file-input');
     const submitButton = document.getElementById('file-submit');
+    const importSuccessMessage = document.getElementById('importSuccessMessage');
+    const importFailMessage = document.getElementById('importFailMessage');
 
     let selectedFile = null;
 
@@ -55,7 +61,17 @@
                 body: formData
             })
                 .then((response) => response.json())
-                .then((data) => console.log(data))
+                .then((data) => { 
+                    if (data.success) {
+                        importSuccessMessage.style.display = 'block';
+                        importFailMessage.style.display = 'none';
+                    }
+                    else {
+                        importSuccessMessage.style.display = 'none';
+                        importFailMessage.style.display = 'block';
+                    }
+                    console.log(data) 
+                })
                 .catch((error) => console.error(error));
         } else {
             alert('Please select a file first!');
