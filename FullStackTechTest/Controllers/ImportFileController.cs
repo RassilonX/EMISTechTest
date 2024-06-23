@@ -1,5 +1,6 @@
 ﻿using DAL;
 using FullStackTechTest.Models.Home;
+using FullStackTechTest.Models.Import;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -33,7 +34,9 @@ public class ImportFileController : Controller
         {
             var jsonData = await reader.ReadToEndAsync();
 
-            dynamic data = JsonConvert.DeserializeObject(jsonData);
+            //dynamic data = JsonConvert.DeserializeObject(jsonData);
+
+            List<ImportJsonModel> data = JsonConvert.DeserializeObject<List<ImportJsonModel>>(jsonData);
 
 
             // Use the variable to set the PersonId fields
