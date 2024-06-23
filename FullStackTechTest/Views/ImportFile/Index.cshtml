@@ -11,33 +11,12 @@
     <input type="submit" id="file-submit" value="Import JSON Data" />
 </div>
 
+@* Possibly move the style tag into a CSS file with a class name, that way we can customise it more *@
 <p style="display: none;" id="importSuccessMessage">Data Import Succeeded</p>
 
 <p style="display: none;" id="importFailMessage">Data Import Failed</p>
 
 <script>
-    // const fileInput = document.getElementById('file-input');
-    // const submitButton = document.getElementById('file-submit');
-
-    // fileInput.addEventListener('change', (e) => {
-    //     const file = fileInput.files[0];
-    //     const formData = new FormData();
-    //     formData.append('file', file);
-
-    //     fetch('/ImportFileController/ImportJson', {
-    //         method: 'POST',
-    //         body: formData
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => console.log(data))
-    //         .catch((error) => console.error(error));
-    // });
-
-    // submitButton.addEventListener('click', (e) => {
-    //     e.preventDefault();
-    //     fileInput.click();
-    // });
-
     const fileInput = document.getElementById('file-input');
     const submitButton = document.getElementById('file-submit');
     const importSuccessMessage = document.getElementById('importSuccessMessage');

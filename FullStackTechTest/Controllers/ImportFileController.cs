@@ -35,18 +35,20 @@ public class ImportFileController : Controller
         {
             var jsonData = await reader.ReadToEndAsync();
 
-            //dynamic data = JsonConvert.DeserializeObject(jsonData);
-
             List<ImportJsonDto> data = JsonConvert.DeserializeObject<List<ImportJsonDto>>(jsonData);
 
             var success = await _dataImportRepository.SaveJson(data);
 
             if (!success)
             {
-                return Json(new { success = false });
+                return StatusCode(500, new { success = false, message = "Failed to import data" });
             }
 
-            return Json(new { success = true });
+            return Ok(new
+            {
+                success = true,
+                message = "Data imported successfully"
+            });
         }
     }
 }
