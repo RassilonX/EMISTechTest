@@ -15,5 +15,5 @@ public class ImportJsonDto
 
     public int GMC { get; set; }
 
-    public List<Address> Address { get; set; }
+    public List<Address> Address { get; set; } = new List<Address>();
 }

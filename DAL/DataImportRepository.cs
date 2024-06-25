@@ -52,7 +52,7 @@ public class DataImportRepository : IDataImportRepository
                             City = address.City,
                             Line1 = address.Line1,
                             Postcode = address.Postcode,
-                            Id = personId
+                            PersonId = personId
                         };
 
                         _dbContext.Addresses.Add(addressEntity);
