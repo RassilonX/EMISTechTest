@@ -1,0 +1,9 @@
+﻿.importSuccess {
+    display: none;
+    color: green;
+}
+
+.importFailed {
+    display: none;
+    color: red;
+}

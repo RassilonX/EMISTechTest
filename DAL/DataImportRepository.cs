@@ -31,11 +31,25 @@ public class DataImportRepository : IDataImportRepository
             {
                 foreach (var item in data)
                 {
+                    var firstName = SanitiseStringInput(item.FirstName);
+                    var lastName = SanitiseStringInput(item.LastName);
+
+                    // Check if the person already exists in the database
+                    var existingPerson = _dbContext.People
+                       //.FirstOrDefault(p => p.GMC == item.GMC && p.FirstName == firstName && p.LastName == lastName);
+                    .FirstOrDefault(p => p.GMC == item.GMC);
+
+                    if (existingPerson != null)
+                    {
+                        // If the person already exists, add it to the failed imports list
+                        throw new Exception("Data already exists");
+                    }
+
                     //First extract the person data
                     var person = new Person()
                     {
-                        FirstName = SanitiseStringInput(item.FirstName),
-                        LastName = SanitiseStringInput(item.LastName),
+                        FirstName = firstName,
+                        LastName = lastName,
                         GMC = item.GMC
                     };
 
