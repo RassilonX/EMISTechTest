@@ -17,7 +17,6 @@ public class DataImportRepositoryTests
         repo = new DataImportRepository(_dbContext.Object);
     }
 
-
     [Theory]
     [InlineData("hello-world!", "Hello-World")]
     [InlineData("hello@world!", "Helloworld")]

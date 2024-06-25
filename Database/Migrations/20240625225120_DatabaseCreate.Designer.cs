@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseDbContext))]
-    [Migration("20240623160851_AutoIncrementIDs")]
-    partial class AutoIncrementIDs
+    [Migration("20240625225120_DatabaseCreate")]
+    partial class DatabaseCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

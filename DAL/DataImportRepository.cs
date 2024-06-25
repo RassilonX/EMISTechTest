@@ -1,14 +1,8 @@
 ﻿using DAL.Dtos;
 using Database;
 using Database.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("DALTests")]
 namespace DAL;
@@ -24,7 +18,7 @@ public class DataImportRepository : IDataImportRepository
 
     public Task<ImportResultDto> SaveJson(List<ImportJsonDto> data)
     {
-        var result = new ImportResultDto() { Success = true, FailedImports = new List<ImportJsonDto>() };
+        var result = new ImportResultDto() { Success = true};
 
         //Use a transaction approach for the whole file, so that we can roll it back if needed
         using (var transaction = _dbContext.Database.BeginTransaction())
@@ -82,7 +76,7 @@ public class DataImportRepository : IDataImportRepository
             }
             catch (Exception ex)
             {
-                //If it's failed, then add it to the result object
+                //If it's failed, then change the success to false
                 result.Success = false;
 
                 transaction.Rollback();
