@@ -4,6 +4,7 @@ using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,8 +34,8 @@ public class DataImportRepository : IDataImportRepository
                     //First extract the person data
                     var person = new Person()
                     {
-                        FirstName = item.FirstName,
-                        LastName = item.LastName,
+                        FirstName = SanitiseStringInput(item.FirstName),
+                        LastName = SanitiseStringInput(item.LastName),
                         GMC = item.GMC
                     };
 
@@ -49,9 +50,9 @@ public class DataImportRepository : IDataImportRepository
                     {
                         var addressEntity = new Address()
                         {
-                            City = address.City,
-                            Line1 = address.Line1,
-                            Postcode = address.Postcode,
+                            City = SanitiseStringInput(address.City),
+                            Line1 = SanitiseStringInput(address.Line1),
+                            Postcode = SanitiseStringInput(address.Postcode).ToUpper(),
                             PersonId = personId
                         };
 
@@ -61,7 +62,7 @@ public class DataImportRepository : IDataImportRepository
                     _dbContext.SaveChanges();
                 }
 
-                // Commit the transaction
+                // Commit the transaction once all the data has been accepted
                 transaction.Commit();
             }
             catch (Exception ex)
@@ -75,5 +76,18 @@ public class DataImportRepository : IDataImportRepository
 
         //Return the successful object
         return Task.FromResult(result);
+    }
+
+    private string SanitiseStringInput(string input)
+    {
+        // Remove special characters, allowing the - character through because of double barelled names
+        var cleanString = new string(input.Where(
+            c => char.IsLetterOrDigit(c) || 
+                    char.IsWhiteSpace(c) ||
+                    c == '-').ToArray());
+
+        var textInfo = new CultureInfo("en-GB", false).TextInfo;
+
+        return textInfo.ToTitleCase(cleanString);
     }
 }
