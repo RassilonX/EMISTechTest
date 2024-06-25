@@ -31,25 +31,6 @@ public class PersonRepository : IPersonRepository
         return peopleList;
     }
 
-    public async Task<int> PersonCountAsync()
-    {
-        int peopleCount = 0;
-
-        var sql = new StringBuilder();
-        sql.AppendLine("SELECT COUNT(*) FROM people");
-
-        await using (var connection = new SqlConnection(Config.DbConnectionString))
-        {
-            await connection.OpenAsync();
-
-            var command = new SqlCommand(sql.ToString(), connection);
-
-            peopleCount = (int)await command.ExecuteScalarAsync();
-        }
-
-        return peopleCount;
-    }
-
     public async Task<Person> GetByIdAsync(int personId)
     {
         var person = new Person();

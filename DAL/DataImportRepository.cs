@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("DALTests")]
 namespace DAL;
 
 public class DataImportRepository : IDataImportRepository
@@ -36,12 +38,11 @@ public class DataImportRepository : IDataImportRepository
 
                     // Check if the person already exists in the database
                     var existingPerson = _dbContext.People
-                       //.FirstOrDefault(p => p.GMC == item.GMC && p.FirstName == firstName && p.LastName == lastName);
                     .FirstOrDefault(p => p.GMC == item.GMC);
 
                     if (existingPerson != null)
                     {
-                        // If the person already exists, add it to the failed imports list
+                        // If the person already exists throw an exception so the import is failed
                         throw new Exception("Data already exists");
                     }
 
@@ -92,7 +93,7 @@ public class DataImportRepository : IDataImportRepository
         return Task.FromResult(result);
     }
 
-    private string SanitiseStringInput(string input)
+    internal string SanitiseStringInput(string input)
     {
         // Remove special characters, allowing the - character through because of double barelled names
         var cleanString = new string(input.Where(
