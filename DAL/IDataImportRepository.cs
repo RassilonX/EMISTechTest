@@ -9,5 +9,5 @@ namespace DAL;
 
 public interface IDataImportRepository
 {
-    public Task<bool> SaveJson(List<ImportJsonDto> data);
+    public Task<ImportResultDto> SaveJson(List<ImportJsonDto> data);
 }

@@ -37,9 +37,9 @@ public class ImportFileController : Controller
 
             List<ImportJsonDto> data = JsonConvert.DeserializeObject<List<ImportJsonDto>>(jsonData);
 
-            var success = await _dataImportRepository.SaveJson(data);
+            var importResult = await _dataImportRepository.SaveJson(data);
 
-            if (!success)
+            if (!importResult.Success)
             {
                 return StatusCode(500, new { success = false, message = "Failed to import data" });
             }

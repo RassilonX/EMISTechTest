@@ -1,4 +1,6 @@
 using DAL;
+using Database;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,10 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IDataImportRepository, DataImportRepository>();
+
+builder.Services.AddDbContextFactory<DatabaseDbContext>(
+    options =>
+        options.UseSqlServer(Config.DbConnectionString));
 
 var app = builder.Build();
 
