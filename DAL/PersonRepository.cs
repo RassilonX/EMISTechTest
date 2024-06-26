@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Text;
+using DAL.Interfaces;
 using Database.Models;
 using Microsoft.Data.SqlClient;
 using MySql.Data.MySqlClient;

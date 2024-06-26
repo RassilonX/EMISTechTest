@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using DAL;
 using Microsoft.AspNetCore.Mvc;
 using FullStackTechTest.Models.Home;
 using FullStackTechTest.Models.Shared;
+using DAL.Interfaces;
 
 namespace FullStackTechTest.Controllers;
 
