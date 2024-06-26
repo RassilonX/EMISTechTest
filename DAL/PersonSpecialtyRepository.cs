@@ -58,11 +58,14 @@ public class PersonSpecialtyRepository : IPersonSpecialtyRepository
 
                 foreach (var item in specialties)
                 {
-                    _dbContext.DoctorSpecialties.Add(new DoctorSpecialty
+                    if (item.Value)
                     {
-                        PersonId = personId,
-                        SpecialtyId = specialtiesList.Where(sl => sl.SpecialtyName == item.Key).Single().Id
-                    });
+                        _dbContext.DoctorSpecialties.Add(new DoctorSpecialty
+                        {
+                            PersonId = personId,
+                            SpecialtyId = specialtiesList.Where(sl => sl.SpecialtyName == item.Key).Single().Id
+                        });
+                    }
                 }
 
                 _dbContext.SaveChanges();
