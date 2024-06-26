@@ -1,0 +1,16 @@
+﻿<script src="~/js/import.js"></script>
+@{
+    ViewBag.Title = "Import File";
+}
+
+<h2>Import File</h2>
+
+<div id="drop-zone">
+    <p>Drag and drop a JSON file or click Browse to select a file</p>
+    <input type="file" id="file-input" />
+    <input class="btn btn-primary" type="submit" id="file-submit" value="Import JSON Data" />
+</div>
+
+<p class="importSuccess" id="importSuccessMessage">Data Import Succeeded</p>
+
+<p class="importFailed" id="importFailMessage">Data Import Failed</p>
