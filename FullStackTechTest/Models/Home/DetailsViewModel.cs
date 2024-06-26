@@ -8,7 +8,7 @@ public class DetailsViewModel
     public Person Person { get; set; }
     public Address Address { get; set; }
 
-    public Dictionary<string, bool> SpecialtyList { get; set; }
+    public Dictionary<string, bool> SpecialtyList { get; set; } = new Dictionary<string, bool>();
     public bool IsEditing { get; set; }
 
     public static async Task<DetailsViewModel> CreateAsync(
