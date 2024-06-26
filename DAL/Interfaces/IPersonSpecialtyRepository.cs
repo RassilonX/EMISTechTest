@@ -9,7 +9,7 @@ namespace DAL.Interfaces;
 
 public interface IPersonSpecialtyRepository
 {
-    public Task<List<DoctorSpecialty>> ListAllAsync();
+    public Task<List<Specialty>> ListAllSpecialtiesAsync();
 
     public Task<List<DoctorSpecialty>> ListDoctorSpecialtyAsync(Person person);
 

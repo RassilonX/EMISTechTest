@@ -1,5 +1,7 @@
 ﻿using DAL.Interfaces;
+using Database;
 using Database.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +12,21 @@ namespace DAL;
 
 public class PersonSpecialtyRepository : IPersonSpecialtyRepository
 {
-    public Task<List<DoctorSpecialty>> ListAllAsync()
+    private readonly DatabaseDbContext _dbContext;
+
+    public PersonSpecialtyRepository(DatabaseDbContext dbContext)
     {
-        throw new NotImplementedException();
+        _dbContext = dbContext ?? throw new ArgumentNullException("Context cannot be null when creating the repository");
     }
 
-    public Task<List<DoctorSpecialty>> ListDoctorSpecialtyAsync(Person person)
+    public async Task<List<Specialty>> ListAllSpecialtiesAsync()
     {
-        throw new NotImplementedException();
+        return await _dbContext.Specialties.ToListAsync();
+    }
+
+    public async Task<List<DoctorSpecialty>> ListDoctorSpecialtyAsync(Person person)
+    {
+        return new List<DoctorSpecialty>();
     }
 
     public Task SaveAsync()

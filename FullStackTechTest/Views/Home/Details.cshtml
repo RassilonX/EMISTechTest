@@ -54,6 +54,16 @@
         
         @if (Model.IsEditing)
         {
+            <ul>
+                @foreach (var specialty in Model.Specialties)
+                {
+                    <li>
+                        <input type="checkbox" name="selectedSpecialties" value="@specialty.Id" />
+                        <label>@specialty.SpecialtyName</label>
+                    </li>
+                }
+            </ul>
+
             <div>
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

@@ -13,11 +13,12 @@ public class HomeController : Controller
     private readonly IAddressRepository _addressRepository;
     private readonly IPersonSpecialtyRepository _personSpecialtyRepository;
 
-    public HomeController(ILogger<HomeController> logger, IPersonRepository personRepository, IAddressRepository addressRepository)
+    public HomeController(ILogger<HomeController> logger, IPersonRepository personRepository, IAddressRepository addressRepository, IPersonSpecialtyRepository personSpecialtyRepository)
     {
         _logger = logger;
         _personRepository = personRepository;
         _addressRepository = addressRepository;
+        _personSpecialtyRepository = personSpecialtyRepository;
     }
 
     public async Task<IActionResult> Index()
