@@ -227,7 +227,7 @@ namespace Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PersonSpecialties");
+                    b.ToTable("DoctorSpecialties");
                 });
 
             modelBuilder.Entity("Database.Models.Person", b =>

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseDbContext))]
-    [Migration("20240626165247_DatabaseCreate")]
+    [Migration("20240626181056_DatabaseCreate")]
     partial class DatabaseCreate
     {
         /// <inheritdoc />
@@ -230,7 +230,7 @@ namespace Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PersonSpecialties");
+                    b.ToTable("DoctorSpecialties");
                 });
 
             modelBuilder.Entity("Database.Models.Person", b =>

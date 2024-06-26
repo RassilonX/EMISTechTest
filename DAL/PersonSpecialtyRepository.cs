@@ -26,7 +26,7 @@ public class PersonSpecialtyRepository : IPersonSpecialtyRepository
 
     public async Task<List<DoctorSpecialty>> ListDoctorSpecialtyAsync(Person person)
     {
-        return new List<DoctorSpecialty>();
+        return await _dbContext.DoctorSpecialties.Where(p => p.PersonId == person.Id).ToListAsync();
     }
 
     public Task SaveAsync()

@@ -13,7 +13,7 @@ public class DatabaseDbContext : DbContext
     public DbSet<Person> People { get; set; }
     public DbSet<Address> Addresses { get; set; }
     public DbSet<Specialty> Specialties { get; set; }
-    public DbSet<DoctorSpecialty> PersonSpecialties { get; set; }
+    public DbSet<DoctorSpecialty> DoctorSpecialties { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

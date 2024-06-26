@@ -68,5 +68,16 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         }
+        else
+        {
+            <ul>
+                @foreach (var specialty in Model.DoctorSpecialties)
+                {
+                    <li>
+                        <p>@Model.Specialties.Single(s => s.Id == specialty.SpecialtyId).SpecialtyName</p>
+                    </li>
+                }
+            </ul>
+        }
     }
 </div>

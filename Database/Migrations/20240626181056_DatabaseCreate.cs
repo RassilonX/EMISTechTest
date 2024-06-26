@@ -29,6 +29,20 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DoctorSpecialties",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PersonId = table.Column<int>(type: "int", nullable: false),
+                    SpecialtyId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DoctorSpecialties", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "People",
                 columns: table => new
                 {
@@ -41,20 +55,6 @@ namespace Database.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_People", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PersonSpecialties",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PersonId = table.Column<int>(type: "int", nullable: false),
-                    SpecialtyId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonSpecialties", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -149,10 +149,10 @@ namespace Database.Migrations
                 name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "People");
+                name: "DoctorSpecialties");
 
             migrationBuilder.DropTable(
-                name: "PersonSpecialties");
+                name: "People");
 
             migrationBuilder.DropTable(
                 name: "Specialties");
