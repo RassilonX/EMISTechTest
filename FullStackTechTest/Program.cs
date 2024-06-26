@@ -13,6 +13,7 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IDataImportRepository, DataImportRepository>();
+builder.Services.AddScoped<IPersonSpecialtyRepository, PersonSpecialtyRepository>();
 
 builder.Services.AddDbContextFactory<DatabaseDbContext>(
     options =>

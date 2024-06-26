@@ -15,6 +15,11 @@ public class PersonSpecialtyRepository : IPersonSpecialtyRepository
         throw new NotImplementedException();
     }
 
+    public Task<List<DoctorSpecialty>> ListDoctorSpecialtyAsync(Person person)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task SaveAsync()
     {
         throw new NotImplementedException();
