@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseDbContext))]
-    [Migration("20240625225120_DatabaseCreate")]
+    [Migration("20240626165247_DatabaseCreate")]
     partial class DatabaseCreate
     {
         /// <inheritdoc />
@@ -214,6 +214,25 @@ namespace Database.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Database.Models.DoctorSpecialty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpecialtyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PersonSpecialties");
+                });
+
             modelBuilder.Entity("Database.Models.Person", b =>
                 {
                     b.Property<int>("Id")
@@ -377,6 +396,75 @@ namespace Database.Migrations
                             FirstName = "Hoyt",
                             GMC = 1795805,
                             LastName = "Turbern"
+                        });
+                });
+
+            modelBuilder.Entity("Database.Models.Specialty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("SpecialtyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Specialties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            SpecialtyName = "Anaesthetics"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            SpecialtyName = "Cardiology"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            SpecialtyName = "Dermatology"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            SpecialtyName = "Emergency Medicine"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            SpecialtyName = "General Practice (GP)"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            SpecialtyName = "Neurology"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            SpecialtyName = "Obstetrics and Gynaecology"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            SpecialtyName = "Ophthalmology"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            SpecialtyName = "Orthopaedic Surgery"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            SpecialtyName = "Psychiatry"
                         });
                 });
 #pragma warning restore 612, 618

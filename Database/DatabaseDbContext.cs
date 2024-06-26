@@ -12,6 +12,8 @@ public class DatabaseDbContext : DbContext
 
     public DbSet<Person> People { get; set; }
     public DbSet<Address> Addresses { get; set; }
+    public DbSet<Specialty> Specialties { get; set; }
+    public DbSet<DoctorSpecialty> PersonSpecialties { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -42,6 +44,10 @@ public class DatabaseDbContext : DbContext
         modelBuilder.Entity<Address>()
             .Property(a => a.Postcode)
             .HasColumnType("varchar(8)");
+
+        modelBuilder.Entity<Specialty>()
+            .Property(p => p.Id)
+            .ValueGeneratedOnAdd();
 
         modelBuilder.Entity<Person>().HasData(
             new Person { Id = 1, FirstName = "Karilynn", LastName = "Rock", GMC = 1169492 },
@@ -87,6 +93,19 @@ public class DatabaseDbContext : DbContext
             new Address { Id = 18, PersonId = 18, Line1 = "50 The Way", City = "Edinburgh", Postcode = "EH1 3YL" },
             new Address { Id = 19, PersonId = 19, Line1 = "55 The Place", City = "Glasgow", Postcode = "G1 1XE" },
             new Address { Id = 20, PersonId = 20, Line1 = "60 The Street", City = "Belfast", Postcode = "BT1 5GS" }
+        );
+
+        modelBuilder.Entity<Specialty>().HasData(
+            new Specialty { Id = 1, SpecialtyName = "Anaesthetics" },
+            new Specialty { Id = 2, SpecialtyName = "Cardiology" },
+            new Specialty { Id = 3, SpecialtyName = "Dermatology" },
+            new Specialty { Id = 4, SpecialtyName = "Emergency Medicine" },
+            new Specialty { Id = 5, SpecialtyName = "General Practice (GP)" },
+            new Specialty { Id = 6, SpecialtyName = "Neurology" },
+            new Specialty { Id = 7, SpecialtyName = "Obstetrics and Gynaecology" },
+            new Specialty { Id = 8, SpecialtyName = "Ophthalmology" },
+            new Specialty { Id = 9, SpecialtyName = "Orthopaedic Surgery" },
+            new Specialty { Id = 10, SpecialtyName = "Psychiatry" }
         );
     }
 }
