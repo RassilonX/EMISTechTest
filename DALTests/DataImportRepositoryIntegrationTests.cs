@@ -4,6 +4,7 @@ using Database;
 using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace DALTests;
 
@@ -14,9 +15,10 @@ public class DataImportRepositoryIntegrationTests
 
     public DataImportRepositoryIntegrationTests()
     {
-        var builder = new ConfigurationBuilder();
+        var builder = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
         var configurationRoot = builder.Build();
-        var connectionString = "Server=localhost;Database=fourteen-fish;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True";
+        var connectionString = configurationRoot.GetConnectionString("DB_CONNECTION_STRING");
 
         var options = new DbContextOptionsBuilder<DatabaseDbContext>()
                  .UseSqlServer(connectionString).Options;
