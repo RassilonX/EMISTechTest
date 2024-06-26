@@ -55,11 +55,11 @@
         @if (Model.IsEditing)
         {
             <ul>
-                @foreach (var specialty in Model.Specialties)
+                @foreach (var specialty in Model.SpecialtyList)
                 {
                     <li>
-                        <input type="checkbox" name="selectedSpecialties" value="@specialty.Id" />
-                        <label>@specialty.SpecialtyName</label>
+                        <input type="checkbox" name="SpecialtyList[@specialty.Key]" @(specialty.Value ? "checked" : "") />
+                        <label>@specialty.Key</label>
                     </li>
                 }
             </ul>
@@ -71,11 +71,14 @@
         else
         {
             <ul>
-                @foreach (var specialty in Model.DoctorSpecialties)
+                @foreach (var specialty in Model.SpecialtyList)
                 {
-                    <li>
-                        <p>@Model.Specialties.Single(s => s.Id == specialty.SpecialtyId).SpecialtyName</p>
-                    </li>
+                    if (specialty.Value)
+                    {
+                        <li>
+                            @specialty.Key
+                        </li>
+                    }
                 }
             </ul>
         }

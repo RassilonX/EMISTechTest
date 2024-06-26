@@ -44,6 +44,7 @@ public class HomeController : Controller
     {
         await _personRepository.SaveAsync(model.Person);
         await _addressRepository.SaveAsync(model.Address);
+        await _personSpecialtyRepository.SaveAsync(model.SpecialtyList, model.Person.Id);
         return RedirectToAction("Details", new { id = model.Person.Id });
     }
 

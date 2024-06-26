@@ -11,7 +11,7 @@ public interface IPersonSpecialtyRepository
 {
     public Task<List<Specialty>> ListAllSpecialtiesAsync();
 
-    public Task<List<DoctorSpecialty>> ListDoctorSpecialtyAsync(Person person);
+    public Task<Dictionary<string, bool>> ListDoctorSpecialtyAsync(Person person);
 
-    public Task SaveAsync();
+    public Task SaveAsync(Dictionary<string, bool> specialties, int personId);
 }

@@ -7,8 +7,8 @@ public class DetailsViewModel
 {
     public Person Person { get; set; }
     public Address Address { get; set; }
-    public List<DoctorSpecialty> DoctorSpecialties { get; set; }
-    public List<Specialty> Specialties { get; set; }
+
+    public Dictionary<string, bool> SpecialtyList { get; set; }
     public bool IsEditing { get; set; }
 
     public static async Task<DetailsViewModel> CreateAsync(
@@ -23,8 +23,7 @@ public class DetailsViewModel
         {
             Person = person,
             Address = await addressRepository.GetForPersonIdAsync(personId),
-            DoctorSpecialties = await personSpecialtyRepository.ListDoctorSpecialtyAsync(person),
-            Specialties = await personSpecialtyRepository.ListAllSpecialtiesAsync(),
+            SpecialtyList = await personSpecialtyRepository.ListDoctorSpecialtyAsync(person),
             IsEditing = isEditing
         };
         return model;

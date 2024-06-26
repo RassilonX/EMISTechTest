@@ -24,13 +24,55 @@ public class PersonSpecialtyRepository : IPersonSpecialtyRepository
         return await _dbContext.Specialties.ToListAsync();
     }
 
-    public async Task<List<DoctorSpecialty>> ListDoctorSpecialtyAsync(Person person)
+    public async Task<Dictionary<string, bool>> ListDoctorSpecialtyAsync(Person person)
     {
-        return await _dbContext.DoctorSpecialties.Where(p => p.PersonId == person.Id).ToListAsync();
+        var result = new Dictionary<string, bool>();
+        var specialtiesList =  await ListAllSpecialtiesAsync();
+
+        var doctorSpecialties = await _dbContext.DoctorSpecialties.Where(p => p.PersonId == person.Id).ToListAsync();
+
+        foreach (var item in specialtiesList)
+        {
+            result.Add(
+                item.SpecialtyName,
+                doctorSpecialties.Any(ds => ds.SpecialtyId == item.Id)
+                );
+        }
+
+        return result;
     }
 
-    public Task SaveAsync()
+    public async Task SaveAsync(Dictionary<string, bool> specialties, int personId)
     {
-        throw new NotImplementedException();
+        using (var transaction = _dbContext.Database.BeginTransaction())
+        {
+            try
+            {
+                var doctorSpecialties = await _dbContext.DoctorSpecialties.Where(p => p.PersonId == personId).ToListAsync();
+                var specialtiesList = await ListAllSpecialtiesAsync();
+
+                foreach (var item in doctorSpecialties)
+                {
+                    _dbContext.Remove(item);
+                }
+
+                foreach (var item in specialties)
+                {
+                    _dbContext.DoctorSpecialties.Add(new DoctorSpecialty
+                    {
+                        PersonId = personId,
+                        SpecialtyId = specialtiesList.Where(sl => sl.SpecialtyName == item.Key).Single().Id
+                    });
+                }
+
+                _dbContext.SaveChanges();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+            }
+
+        }
     }
 }
