@@ -4,9 +4,8 @@ using Database;
 using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using static Org.BouncyCastle.Math.EC.ECCurve;
 
-namespace DALTests;
+namespace DALTests.Integration;
 
 public class DataImportRepositoryIntegrationTests
 {

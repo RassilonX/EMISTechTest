@@ -3,7 +3,7 @@ using Database;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
-namespace DALTests;
+namespace DALTests.Unit;
 
 public class DataImportRepositoryTests
 {
