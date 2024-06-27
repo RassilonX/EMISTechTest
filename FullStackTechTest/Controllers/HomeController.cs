@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using DAL;
 using Microsoft.AspNetCore.Mvc;
 using FullStackTechTest.Models.Home;
 using FullStackTechTest.Models.Shared;
+using DAL.Interfaces;
 
 namespace FullStackTechTest.Controllers;
 
@@ -11,12 +11,14 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly IPersonRepository _personRepository;
     private readonly IAddressRepository _addressRepository;
+    private readonly IPersonSpecialtyRepository _personSpecialtyRepository;
 
-    public HomeController(ILogger<HomeController> logger, IPersonRepository personRepository, IAddressRepository addressRepository)
+    public HomeController(ILogger<HomeController> logger, IPersonRepository personRepository, IAddressRepository addressRepository, IPersonSpecialtyRepository personSpecialtyRepository)
     {
         _logger = logger;
         _personRepository = personRepository;
         _addressRepository = addressRepository;
+        _personSpecialtyRepository = personSpecialtyRepository;
     }
 
     public async Task<IActionResult> Index()
@@ -27,13 +29,13 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Details(int id)
     {
-        var model = await DetailsViewModel.CreateAsync(id, false, _personRepository, _addressRepository);
+        var model = await DetailsViewModel.CreateAsync(id, false, _personRepository, _addressRepository, _personSpecialtyRepository);
         return View(model);
     }
 
     public async Task<IActionResult> Edit(int id)
     {
-        var model = await DetailsViewModel.CreateAsync(id, true, _personRepository, _addressRepository);
+        var model = await DetailsViewModel.CreateAsync(id, true, _personRepository, _addressRepository, _personSpecialtyRepository);
         return View("Details", model);
     }
 
@@ -42,6 +44,7 @@ public class HomeController : Controller
     {
         await _personRepository.SaveAsync(model.Person);
         await _addressRepository.SaveAsync(model.Address);
+        await _personSpecialtyRepository.SaveAsync(model.SpecialtyList, model.Person.Id);
         return RedirectToAction("Details", new { id = model.Person.Id });
     }
 

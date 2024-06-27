@@ -1,4 +1,4 @@
-using DAL;
+using DAL.Interfaces;
 using Database.Models;
 
 namespace FullStackTechTest.Models.Home;

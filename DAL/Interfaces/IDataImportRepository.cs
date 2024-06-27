@@ -1,6 +1,6 @@
 ﻿using DAL.Dtos;
 
-namespace DAL;
+namespace DAL.Interfaces;
 
 public interface IDataImportRepository
 {

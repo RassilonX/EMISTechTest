@@ -1,5 +1,5 @@
-﻿using DAL;
-using DAL.Dtos;
+﻿using DAL.Dtos;
+using DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 

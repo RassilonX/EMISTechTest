@@ -1,6 +1,6 @@
 using Database.Models;
 
-namespace DAL;
+namespace DAL.Interfaces;
 
 public interface IAddressRepository
 {

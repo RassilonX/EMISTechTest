@@ -29,6 +29,20 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DoctorSpecialties",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PersonId = table.Column<int>(type: "int", nullable: false),
+                    SpecialtyId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DoctorSpecialties", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "People",
                 columns: table => new
                 {
@@ -41,6 +55,19 @@ namespace Database.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_People", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Specialties",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SpecialtyName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Specialties", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
@@ -96,6 +123,23 @@ namespace Database.Migrations
                     { 19, "Virgil", 3165201, "Sperry" },
                     { 20, "Hoyt", 1795805, "Turbern" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Specialties",
+                columns: new[] { "Id", "SpecialtyName" },
+                values: new object[,]
+                {
+                    { 1, "Anaesthetics" },
+                    { 2, "Cardiology" },
+                    { 3, "Dermatology" },
+                    { 4, "Emergency Medicine" },
+                    { 5, "General Practice (GP)" },
+                    { 6, "Neurology" },
+                    { 7, "Obstetrics and Gynaecology" },
+                    { 8, "Ophthalmology" },
+                    { 9, "Orthopaedic Surgery" },
+                    { 10, "Psychiatry" }
+                });
         }
 
         /// <inheritdoc />
@@ -105,7 +149,13 @@ namespace Database.Migrations
                 name: "Addresses");
 
             migrationBuilder.DropTable(
+                name: "DoctorSpecialties");
+
+            migrationBuilder.DropTable(
                 name: "People");
+
+            migrationBuilder.DropTable(
+                name: "Specialties");
         }
     }
 }
