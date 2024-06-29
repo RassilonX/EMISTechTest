@@ -1,7 +1,34 @@
-﻿@*
+﻿@model FullStackTechTest.Models.Home.AdminViewModel
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Admin";
 }
 
 <p>THIS IS THE ADMIN PAGE</p>
+
+<div class="container">
+    <div class="pb-4">
+        @if (!Model.IsEditing)
+        {
+            <a href="@Url.Action("Edit", new {})" class="btn btn-primary" role="button">Edit</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Index", new {})" class="btn btn-primary" role="button">Cancel</a>
+        }
+
+        @using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
+        {
+
+
+            if (Model.IsEditing)
+            {
+                <input type="submit" value="Save" class="btn btn-primary" />
+            }  
+        }
+    </div>
+
+
+</div>
