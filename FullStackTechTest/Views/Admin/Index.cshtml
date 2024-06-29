@@ -19,9 +19,16 @@
             <a href="@Url.Action("Index", new {})" class="btn btn-primary" role="button">Cancel</a>
         }
 
-        @using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
+        @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { @class = "form-inline" }))
         {
+            <h3>Specialties:</h3>
 
+            foreach(var item in Model.SpecialtyList)
+            {
+                <div class="form-group pb-1">
+                    <input type="text" name="person.firstName" value="@item.SpecialtyName" class="@(Model.IsEditing ? "form-control" : "form-control-plaintext")" @(Model.IsEditing ? "" : "readonly") />
+                </div>
+            }
 
             if (Model.IsEditing)
             {
