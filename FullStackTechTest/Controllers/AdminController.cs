@@ -50,4 +50,14 @@ public class AdminController : Controller
 
         return View("Index", viewModel);
     }
+
+    public async Task<IActionResult> Remove(int id)
+    {
+        //This is stub logic to be implemented later
+        var model = new AdminViewModel();
+        model.SpecialtyList = await _personSpecialtyRepository.ListAllSpecialtiesAsync();
+        model.IsEditing = false;
+
+        return View("Index", model);
+    }
 }
