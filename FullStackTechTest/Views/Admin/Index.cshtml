@@ -22,6 +22,15 @@
 
         @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { @class = "form-inline" }))
         {
+            @Html.HiddenFor(m => m.IsEditing)
+            @Html.HiddenFor(m => m.AddNewSpecialty)
+
+            @for (int i = 0; i < Model.SpecialtyList.Count; i++)
+            {
+                @Html.HiddenFor(m => m.SpecialtyList[i].Id)
+                @Html.HiddenFor(m => m.SpecialtyList[i].SpecialtyName)
+            }
+
             <h3>Specialties:</h3>
 
             foreach(var item in Model.SpecialtyList)
@@ -33,11 +42,11 @@
 
             if (Model.IsEditing)
             {
-                @* <a href="@Url.Action("Add", "Admin", Model)" class="btn btn-primary" role="button">Add Specialty</a> *@
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" onclick="document.getElementById('AddNewSpecialty').value = 'true';" />
             }  
         }
 
+        @* We add an empty element using this to be altered and saved later *@
         @if (Model.IsEditing)
         {
             @using (Html.BeginForm("Add", "Admin", FormMethod.Post))

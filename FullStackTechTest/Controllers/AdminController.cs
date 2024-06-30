@@ -26,11 +26,17 @@ public class AdminController : Controller
 
     public async Task<IActionResult> Edit([FromForm] AdminViewModel viewModel)
     {
-        var model = new AdminViewModel()
+        var model = new AdminViewModel();
+        if (viewModel.AddNewSpecialty)
         {
-            SpecialtyList = await _personSpecialtyRepository.ListAllSpecialtiesAsync(),
-            IsEditing = true
-        };
+            model.SpecialtyList = await _personSpecialtyRepository.ListAllSpecialtiesAsync();
+            model.IsEditing = false;
+        }
+        else
+        {
+            model.SpecialtyList = await _personSpecialtyRepository.ListAllSpecialtiesAsync();
+            model.IsEditing = true;
+        }
 
         return View("Index", model);
     }
@@ -41,8 +47,6 @@ public class AdminController : Controller
         viewModel.SpecialtyList.Add(
             new Specialty { SpecialtyName = "" }
             );
-
-        var dummy = 6;
 
         return View("Index", viewModel);
     }
