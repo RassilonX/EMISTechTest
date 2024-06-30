@@ -1,4 +1,5 @@
-﻿@model FullStackTechTest.Models.Home.AdminViewModel
+﻿@using FullStackTechTest.Models.Home
+@model FullStackTechTest.Models.Home.AdminViewModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -12,11 +13,11 @@
     <div class="pb-4">
         @if (!Model.IsEditing)
         {
-            <a href="@Url.Action("Edit", new {})" class="btn btn-primary" role="button">Edit</a>
+            <a href="@Url.Action("Edit")" class="btn btn-primary" role="button">Edit</a>
         }
         else
         {
-            <a href="@Url.Action("Index", new {})" class="btn btn-primary" role="button">Cancel</a>
+            <a href="@Url.Action("Index")" class="btn btn-primary" role="button">Cancel</a>
         }
 
         @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { @class = "form-inline" }))
@@ -32,8 +33,26 @@
 
             if (Model.IsEditing)
             {
+                @* <a href="@Url.Action("Add", "Admin", Model)" class="btn btn-primary" role="button">Add Specialty</a> *@
                 <input type="submit" value="Save" class="btn btn-primary" />
             }  
+        }
+
+        @if (Model.IsEditing)
+        {
+            @using (Html.BeginForm("Add", "Admin", FormMethod.Post))
+            {
+                @Html.HiddenFor(m => m.IsEditing)
+                @Html.HiddenFor(m => m.AddNewSpecialty)
+
+                @for (int i = 0; i < Model.SpecialtyList.Count; i++)
+                {
+                    @Html.HiddenFor(m => m.SpecialtyList[i].Id)
+                    @Html.HiddenFor(m => m.SpecialtyList[i].SpecialtyName)
+                }
+
+                <input type="submit" value="Add Specialty" class="btn btn-primary" />
+            }
         }
     </div>
 

@@ -1,4 +1,5 @@
 ﻿using DAL.Interfaces;
+using Database.Models;
 using FullStackTechTest.Models.Home;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,14 +18,13 @@ public class AdminController : Controller
     {
         var model = new AdminViewModel() 
         { 
-            SpecialtyList = await _personSpecialtyRepository.ListAllSpecialtiesAsync(),
-            IsEditing = false
+            SpecialtyList = await _personSpecialtyRepository.ListAllSpecialtiesAsync()
         };
 
         return View(model);
     }
 
-    public async Task<IActionResult> Edit()
+    public async Task<IActionResult> Edit([FromForm] AdminViewModel viewModel)
     {
         var model = new AdminViewModel()
         {
@@ -33,5 +33,17 @@ public class AdminController : Controller
         };
 
         return View("Index", model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Add([FromForm] AdminViewModel viewModel)
+    {
+        viewModel.SpecialtyList.Add(
+            new Specialty { SpecialtyName = "" }
+            );
+
+        var dummy = 6;
+
+        return View("Index", viewModel);
     }
 }
