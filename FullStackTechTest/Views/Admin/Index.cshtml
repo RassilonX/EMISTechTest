@@ -37,7 +37,11 @@
             {
                 <div class="specialty-list">
                     <input type="text" name="person.firstName" value="@item.SpecialtyName" class="@(Model.IsEditing ? "form-control" : "form-control-plaintext") inline" @(Model.IsEditing ? "" : "readonly") />
-                    @Html.ActionLink("Remove", "Remove", "Admin", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    
+                    @if(!Model.IsEditing)
+                    {
+                        @Html.ActionLink("Remove", "Remove", "Admin", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    }
                 </div>
             }
 
