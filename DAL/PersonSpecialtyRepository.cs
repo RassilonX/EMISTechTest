@@ -78,4 +78,50 @@ public class PersonSpecialtyRepository : IPersonSpecialtyRepository
 
         }
     }
+
+    //These are going to go in a separate repo I think
+    public async Task<List<Specialty>> UpdateSpecialtyTableAsync(List<Specialty> specialties)
+    {
+        var result = specialties;
+
+        using (var transaction = _dbContext.Database.BeginTransaction())
+        {
+            try
+            {
+                _dbContext.Specialties.UpdateRange(result);
+                await _dbContext.SaveChangesAsync();
+
+                transaction.Commit();
+            }
+            catch (Exception ex) 
+            {
+                transaction.Rollback();
+            }
+        }
+
+        return result;
+    }
+
+
+    public async Task DeleteSpecialtyAsync(int specialtyId)
+    {
+        using (var transaction = _dbContext.Database.BeginTransaction())
+        {
+            try
+            {
+                var specialty = await _dbContext.Specialties.FindAsync(specialtyId);
+                if (specialty != null)
+                {
+                    _dbContext.Specialties.Remove(specialty);
+                    await _dbContext.SaveChangesAsync();
+
+                    transaction.Commit();
+                }   
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+            }
+        }
+    }
 }

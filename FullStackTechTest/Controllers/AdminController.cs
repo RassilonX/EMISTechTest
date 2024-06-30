@@ -44,8 +44,9 @@ public class AdminController : Controller
     [HttpPost]
     public async Task<IActionResult> Add([FromForm] AdminViewModel viewModel)
     {
+        var id = viewModel.SpecialtyList.Count();
         viewModel.SpecialtyList.Add(
-            new Specialty { SpecialtyName = "" }
+            new Specialty { Id = id, SpecialtyName = "" }
             );
 
         return View("Index", viewModel);
@@ -53,7 +54,8 @@ public class AdminController : Controller
 
     public async Task<IActionResult> Remove(int id)
     {
-        //This is stub logic to be implemented later
+        await _personSpecialtyRepository.DeleteSpecialtyAsync(id);
+
         var model = new AdminViewModel();
         model.SpecialtyList = await _personSpecialtyRepository.ListAllSpecialtiesAsync();
         model.IsEditing = false;

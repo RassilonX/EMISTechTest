@@ -45,6 +45,10 @@ public class DatabaseDbContext : DbContext
             .Property(a => a.Postcode)
             .HasColumnType("varchar(8)");
 
+        modelBuilder.Entity<Specialty>()
+            .Property(p => p.Id)
+            .ValueGeneratedOnAdd();
+
         modelBuilder.Entity<DoctorSpecialty>()
             .Property(p => p.Id)
             .ValueGeneratedOnAdd();
