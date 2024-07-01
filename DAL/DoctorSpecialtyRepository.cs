@@ -19,7 +19,7 @@ public class DoctorSpecialtyRepository : IDoctorSpecialtyRepository
         _dbContext = dbContext ?? throw new ArgumentNullException("Context cannot be null when creating the repository");
     }
 
-    public async Task<Dictionary<string, bool>> ListDoctorSpecialtyByPersonAsync(Person person)
+    public async Task<Dictionary<string, bool>> ListAllDoctorSpecialtiesByPersonAsync(Person person)
     {
         var result = new Dictionary<string, bool>();
         var specialtiesList =  await _dbContext.Specialties.ToListAsync();

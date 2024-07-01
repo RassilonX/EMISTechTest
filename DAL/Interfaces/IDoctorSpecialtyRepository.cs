@@ -9,7 +9,7 @@ namespace DAL.Interfaces;
 
 public interface IDoctorSpecialtyRepository
 {
-    public Task<Dictionary<string, bool>> ListDoctorSpecialtyByPersonAsync(Person person);
+    public Task<Dictionary<string, bool>> ListAllDoctorSpecialtiesByPersonAsync(Person person);
 
     public Task SaveAsync(Dictionary<string, bool> specialties, int personId);
 }

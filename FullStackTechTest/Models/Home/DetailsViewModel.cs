@@ -23,7 +23,7 @@ public class DetailsViewModel
         {
             Person = person,
             Address = await addressRepository.GetForPersonIdAsync(personId),
-            SpecialtyList = await personSpecialtyRepository.ListDoctorSpecialtyByPersonAsync(person),
+            SpecialtyList = await personSpecialtyRepository.ListAllDoctorSpecialtiesByPersonAsync(person),
             IsEditing = isEditing
         };
         return model;

@@ -28,7 +28,7 @@ public class DoctorSpecialtyRepositoryIntegrationTests
     }
 
     [Fact]
-    public async Task ListDoctorSpecialtyAsync_ReturnsDictionaryOfSpecialties()
+    public async Task ListAllDoctorSpecialtiesByPersonAsync_ReturnsDictionaryOfSpecialties()
     {
         // Arrange
         var data = new List<ImportJsonDto>
@@ -47,7 +47,7 @@ public class DoctorSpecialtyRepositoryIntegrationTests
         var specialtyCount = _dbContext.Specialties.Count();
 
         // Act
-        var result = await _repository.ListDoctorSpecialtyByPersonAsync(person);
+        var result = await _repository.ListAllDoctorSpecialtiesByPersonAsync(person);
 
         //We remove the data we inserted to make the test repeatable
         _dbContext.People.Remove(person);
@@ -61,7 +61,7 @@ public class DoctorSpecialtyRepositoryIntegrationTests
     }
 
     [Fact]
-    public async Task ListDoctorSpecialtyAsync_ReturnsDictionaryWithExpectedTrueValues()
+    public async Task ListAllDoctorSpecialtiesByPersonAsync_ReturnsDictionaryWithExpectedTrueValues()
     {
         // Arrange
         var data = new List<ImportJsonDto>
@@ -86,7 +86,7 @@ public class DoctorSpecialtyRepositoryIntegrationTests
         _dbContext.SaveChanges();
 
         //Act
-        var result = await _repository.ListDoctorSpecialtyByPersonAsync(person);
+        var result = await _repository.ListAllDoctorSpecialtiesByPersonAsync(person);
         int trueCount = result.Count(r => r.Value);
 
         //We remove the data we inserted to make the test repeatable
@@ -124,7 +124,7 @@ public class DoctorSpecialtyRepositoryIntegrationTests
         var importedData = await _dataImportRepository.SaveJson(data);
         var person = _dbContext.People.FirstOrDefault(p => p.GMC == 4345678);
 
-        var specialties = await _repository.ListDoctorSpecialtyByPersonAsync(person);
+        var specialties = await _repository.ListAllDoctorSpecialtiesByPersonAsync(person);
         specialties["Anaesthetics"] = true;
         specialties["Cardiology"] = true;
         specialties["Dermatology"] = true;
