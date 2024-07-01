@@ -11,7 +11,7 @@ public interface ISpecialtyRepository
 {
     public Task<List<Specialty>> ListAllSpecialtiesAsync();
 
-    public Task DeleteSpecialtyAsync(int specialtyId);
+    public Task DeleteAsync(int specialtyId);
 
-    public Task SaveNewSpecialtyAsync(string specialtyName);
+    public Task SaveAsync(string specialtyName);
 }

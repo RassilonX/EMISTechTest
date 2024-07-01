@@ -27,14 +27,14 @@ public class AdminController : Controller
     [HttpPost]
     public async Task<IActionResult> Add([FromForm] AdminViewModel viewModel)
     {
-        await _specialtyRepository.SaveNewSpecialtyAsync(viewModel.NewSpecialty);
+        await _specialtyRepository.SaveAsync(viewModel.NewSpecialty);
 
         return RedirectToAction("Index");
     }
 
     public async Task<IActionResult> Remove(int id)
     {
-        await _specialtyRepository.DeleteSpecialtyAsync(id);
+        await _specialtyRepository.DeleteAsync(id);
 
         return RedirectToAction("Index");
     }

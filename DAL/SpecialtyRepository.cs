@@ -24,7 +24,7 @@ public class SpecialtyRepository : ISpecialtyRepository
         return await _dbContext.Specialties.ToListAsync();
     }
 
-    public async Task DeleteSpecialtyAsync(int specialtyId)
+    public async Task DeleteAsync(int specialtyId)
     {
         using (var transaction = _dbContext.Database.BeginTransaction())
         {
@@ -46,7 +46,7 @@ public class SpecialtyRepository : ISpecialtyRepository
         }
     }
 
-    public async Task SaveNewSpecialtyAsync(string specialtyName)
+    public async Task SaveAsync(string specialtyName)
     {
         using (var transaction = _dbContext.Database.BeginTransaction())
         {
