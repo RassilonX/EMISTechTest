@@ -9,4 +9,6 @@ public class AdminViewModel
     public bool IsEditing { get; set; } = false;
 
     public bool AddNewSpecialty { get; set; } = false;
+
+    public string NewSpecialty { get; set; } = string.Empty;
 }

@@ -7,58 +7,41 @@ namespace FullStackTechTest.Controllers;
 
 public class AdminController : Controller
 {
-    private readonly IPersonSpecialtyRepository _personSpecialtyRepository;
+    private readonly ISpecialtyRepository _specialtyRepository;
 
-    public AdminController(IPersonSpecialtyRepository personSpecialtyRepository)
+    public AdminController(ISpecialtyRepository specialtyRepository)
     {
-        _personSpecialtyRepository = personSpecialtyRepository;
+        _specialtyRepository = specialtyRepository;
     }
 
     public async Task<IActionResult> Index()
     {
         var model = new AdminViewModel() 
         { 
-            SpecialtyList = await _personSpecialtyRepository.ListAllSpecialtiesAsync()
+            SpecialtyList = await _specialtyRepository.ListAllSpecialtiesAsync()
         };
 
         return View(model);
     }
 
-    public async Task<IActionResult> Edit([FromForm] AdminViewModel viewModel)
-    {
-        var model = new AdminViewModel();
-        if (viewModel.AddNewSpecialty)
-        {
-            model.SpecialtyList = await _personSpecialtyRepository.ListAllSpecialtiesAsync();
-            model.IsEditing = false;
-        }
-        else
-        {
-            model.SpecialtyList = await _personSpecialtyRepository.ListAllSpecialtiesAsync();
-            model.IsEditing = true;
-        }
-
-        return View("Index", model);
-    }
-
     [HttpPost]
     public async Task<IActionResult> Add([FromForm] AdminViewModel viewModel)
     {
-        var id = viewModel.SpecialtyList.Count();
-        viewModel.SpecialtyList.Add(
-            new Specialty { Id = id, SpecialtyName = "" }
-            );
+        await _specialtyRepository.SaveNewSpecialtyAsync(viewModel.NewSpecialty);
 
-        return View("Index", viewModel);
+        return RedirectToAction("Index");
     }
 
     public async Task<IActionResult> Remove(int id)
     {
-        await _personSpecialtyRepository.DeleteSpecialtyAsync(id);
+        await _specialtyRepository.DeleteSpecialtyAsync(id);
 
-        var model = new AdminViewModel();
-        model.SpecialtyList = await _personSpecialtyRepository.ListAllSpecialtiesAsync();
-        model.IsEditing = false;
+        return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> AddSpecialty()
+    {
+        var model = new AdminViewModel() { AddNewSpecialty = true };
 
         return View("Index", model);
     }

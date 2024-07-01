@@ -11,9 +11,9 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly IPersonRepository _personRepository;
     private readonly IAddressRepository _addressRepository;
-    private readonly IPersonSpecialtyRepository _personSpecialtyRepository;
+    private readonly IDoctorSpecialtyRepository _personSpecialtyRepository;
 
-    public HomeController(ILogger<HomeController> logger, IPersonRepository personRepository, IAddressRepository addressRepository, IPersonSpecialtyRepository personSpecialtyRepository)
+    public HomeController(ILogger<HomeController> logger, IPersonRepository personRepository, IAddressRepository addressRepository, IDoctorSpecialtyRepository personSpecialtyRepository)
     {
         _logger = logger;
         _personRepository = personRepository;

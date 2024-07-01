@@ -7,68 +7,35 @@
     ViewData["Title"] = "Admin";
 }
 
-<p>THIS IS THE ADMIN PAGE</p>
-
 <div class="container">
     <div class="pb-4">
-        @if (!Model.IsEditing)
+        @if (!Model.AddNewSpecialty)
         {
-            <a href="@Url.Action("Edit")" class="btn btn-primary" role="button">Edit</a>
+            <a href="@Url.Action("AddSpecialty")" class="btn btn-primary" role="button">Add Specialty</a>
+
+            <h3>Specialties:</h3>
+
+            foreach (var item in Model.SpecialtyList)
+            {
+                <div class="specialty-list">
+                    <input type="text" name="person.firstName" value="@item.SpecialtyName" class="@(Model.IsEditing ? "form-control" : "form-control-plaintext") inline" @(Model.IsEditing ? "" : "readonly") />
+
+                    @Html.ActionLink("Remove", "Remove", "Admin", new { id = item.Id }, new { @class = "btn btn-primary" })
+                </div>
+            }
         }
         else
         {
             <a href="@Url.Action("Index")" class="btn btn-primary" role="button">Cancel</a>
-        }
 
-        @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { @class = "form-inline" }))
-        {
-            @Html.HiddenFor(m => m.IsEditing)
-            @Html.HiddenFor(m => m.AddNewSpecialty)
+            <p>New Specialty:</p>
 
-            @for (int i = 0; i < Model.SpecialtyList.Count; i++)
-            {
-                @Html.HiddenFor(m => m.SpecialtyList[i].Id)
-                @Html.HiddenFor(m => m.SpecialtyList[i].SpecialtyName)
-            }
-
-            <h3>Specialties:</h3>
-
-            foreach(var item in Model.SpecialtyList)
-            {
-                <div class="specialty-list">
-                    <input type="text" name="person.firstName" value="@item.SpecialtyName" class="@(Model.IsEditing ? "form-control" : "form-control-plaintext") inline" @(Model.IsEditing ? "" : "readonly") />
-                    
-                    @if(!Model.IsEditing)
-                    {
-                        @Html.ActionLink("Remove", "Remove", "Admin", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    }
-                </div>
-            }
-
-            if (Model.IsEditing)
-            {
-                <input type="submit" value="Save" class="btn btn-primary" onclick="document.getElementById('AddNewSpecialty').value = 'true';" />
-            }  
-        }
-
-        @* We add an empty element using this to be altered and saved later *@
-        @if (Model.IsEditing)
-        {
             @using (Html.BeginForm("Add", "Admin", FormMethod.Post))
             {
-                @Html.HiddenFor(m => m.IsEditing)
-                @Html.HiddenFor(m => m.AddNewSpecialty)
-
-                @for (int i = 0; i < Model.SpecialtyList.Count; i++)
-                {
-                    @Html.HiddenFor(m => m.SpecialtyList[i].Id)
-                    @Html.HiddenFor(m => m.SpecialtyList[i].SpecialtyName)
-                }
+                @Html.EditorFor(m => m.NewSpecialty)
 
                 <input type="submit" value="Add Specialty" class="btn btn-primary" />
             }
         }
     </div>
-
-
 </div>

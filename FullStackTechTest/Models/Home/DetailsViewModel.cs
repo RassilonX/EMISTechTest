@@ -16,14 +16,14 @@ public class DetailsViewModel
         bool isEditing, 
         IPersonRepository personRepository, 
         IAddressRepository addressRepository, 
-        IPersonSpecialtyRepository personSpecialtyRepository)
+        IDoctorSpecialtyRepository personSpecialtyRepository)
     {
         var person = await personRepository.GetByIdAsync(personId);
         var model = new DetailsViewModel
         {
             Person = person,
             Address = await addressRepository.GetForPersonIdAsync(personId),
-            SpecialtyList = await personSpecialtyRepository.ListDoctorSpecialtyAsync(person),
+            SpecialtyList = await personSpecialtyRepository.ListDoctorSpecialtyByPersonAsync(person),
             IsEditing = isEditing
         };
         return model;
