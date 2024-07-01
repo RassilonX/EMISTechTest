@@ -7,11 +7,9 @@ using Database.Models;
 
 namespace DAL.Interfaces;
 
-public interface IPersonSpecialtyRepository
+public interface IDoctorSpecialtyRepository
 {
-    public Task<List<Specialty>> ListAllSpecialtiesAsync();
-
-    public Task<Dictionary<string, bool>> ListDoctorSpecialtyAsync(Person person);
+    public Task<Dictionary<string, bool>> ListAllDoctorSpecialtiesByPersonAsync(Person person);
 
     public Task SaveAsync(Dictionary<string, bool> specialties, int personId);
 }

@@ -4,42 +4,26 @@ using Database;
 using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DALTests.Integration;
 
-public class PersonSpecialtyRepositoryIntegrationTests
+public class DoctorSpecialtyRepositoryIntegrationTests
 {
     private readonly DatabaseDbContext _dbContext;
-    private readonly PersonSpecialtyRepository _repository;
+    private readonly DoctorSpecialtyRepository _repository;
     private readonly DataImportRepository _dataImportRepository;
 
-    public PersonSpecialtyRepositoryIntegrationTests()
+    public DoctorSpecialtyRepositoryIntegrationTests()
     {
         var options = CreateOptions();
 
         _dbContext = new DatabaseDbContext(options);
-        _repository = new PersonSpecialtyRepository(_dbContext);
+        _repository = new DoctorSpecialtyRepository(_dbContext);
         _dataImportRepository = new DataImportRepository(_dbContext);
     }
 
     [Fact]
-    public async Task ListAllSpecialtiesAsync_SafelyReturnsListOfSpecialties()
-    {
-        // Arrange - Act
-        var result = await _repository.ListAllSpecialtiesAsync();
-
-        // Assert
-        Assert.NotNull(result);
-        Assert.IsType<List<Specialty>>(result);
-    }
-
-    [Fact]
-    public async Task ListDoctorSpecialtyAsync_ReturnsDictionaryOfSpecialties()
+    public async Task ListAllDoctorSpecialtiesByPersonAsync_ReturnsDictionaryOfSpecialties()
     {
         // Arrange
         var data = new List<ImportJsonDto>
@@ -58,7 +42,7 @@ public class PersonSpecialtyRepositoryIntegrationTests
         var specialtyCount = _dbContext.Specialties.Count();
 
         // Act
-        var result = await _repository.ListDoctorSpecialtyAsync(person);
+        var result = await _repository.ListAllDoctorSpecialtiesByPersonAsync(person);
 
         //We remove the data we inserted to make the test repeatable
         _dbContext.People.Remove(person);
@@ -72,7 +56,7 @@ public class PersonSpecialtyRepositoryIntegrationTests
     }
 
     [Fact]
-    public async Task ListDoctorSpecialtyAsync_ReturnsDictionaryWithExpectedTrueValues()
+    public async Task ListAllDoctorSpecialtiesByPersonAsync_ReturnsDictionaryWithExpectedTrueValues()
     {
         // Arrange
         var data = new List<ImportJsonDto>
@@ -97,7 +81,7 @@ public class PersonSpecialtyRepositoryIntegrationTests
         _dbContext.SaveChanges();
 
         //Act
-        var result = await _repository.ListDoctorSpecialtyAsync(person);
+        var result = await _repository.ListAllDoctorSpecialtiesByPersonAsync(person);
         int trueCount = result.Count(r => r.Value);
 
         //We remove the data we inserted to make the test repeatable
@@ -135,7 +119,7 @@ public class PersonSpecialtyRepositoryIntegrationTests
         var importedData = await _dataImportRepository.SaveJson(data);
         var person = _dbContext.People.FirstOrDefault(p => p.GMC == 4345678);
 
-        var specialties = await _repository.ListDoctorSpecialtyAsync(person);
+        var specialties = await _repository.ListAllDoctorSpecialtiesByPersonAsync(person);
         specialties["Anaesthetics"] = true;
         specialties["Cardiology"] = true;
         specialties["Dermatology"] = true;

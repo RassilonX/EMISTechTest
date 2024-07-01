@@ -12,7 +12,7 @@ public class DatabaseDbContext : DbContext
 
     public DbSet<Person> People { get; set; }
     public DbSet<Address> Addresses { get; set; }
-    public virtual DbSet<Specialty> Specialties { get; set; }
+    public DbSet<Specialty> Specialties { get; set; }
     public DbSet<DoctorSpecialty> DoctorSpecialties { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -48,6 +48,13 @@ public class DatabaseDbContext : DbContext
         modelBuilder.Entity<Specialty>()
             .Property(p => p.Id)
             .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<DoctorSpecialty>()
+            .Property(p => p.Id)
+            .ValueGeneratedOnAdd();
+
+        //For later, get the adding bit done first
+        //modelBuilder.Entity<DoctorSpecialty>().HasOne(ds => ds.PersonId).WithMany().HasForeignKey(ds => ds.PersonId);
 
         modelBuilder.Entity<Person>().HasData(
             new Person { Id = 1, FirstName = "Karilynn", LastName = "Rock", GMC = 1169492 },
