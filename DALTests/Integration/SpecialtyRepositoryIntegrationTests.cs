@@ -10,7 +10,6 @@ public class SpecialtyRepositoryIntegrationTests
 {
     private readonly DatabaseDbContext _dbContext;
     private readonly SpecialtyRepository _repository;
-    private readonly DataImportRepository _dataImportRepository;
 
     public SpecialtyRepositoryIntegrationTests()
     {
@@ -18,7 +17,6 @@ public class SpecialtyRepositoryIntegrationTests
 
         _dbContext = new DatabaseDbContext(options);
         _repository = new SpecialtyRepository(_dbContext);
-        _dataImportRepository = new DataImportRepository(_dbContext);
     }
 
     [Fact]
